@@ -11,8 +11,8 @@
     ></script>
   </head>
   <body>
-    <section class="grid grid-cols-12">
-      <section
+    <main class="md:grid md:grid-cols-12 gap-4 p-4">
+      <aside
         class="flex flex-col col-span-3 shadow-xl shadow-gray-400 rounded-lg px-2 text-center gap-1"
       >
         <h2 class="py-1">Staff Members (Unassigned)</h2>
@@ -54,181 +54,111 @@
             </svg>
           </div>
         </div>
-      </section>
+      </aside>
       <div class="grid-cols-1"></div>
-      <section class="grid col-span-8 bg-blue-100 m-2">
-        <!-- test image  -->
-        <!-- <div class="bg-[url(/img/plan-69.jpg)] h-100vh bg-cover bg-center block max-w-full">
-        </div>  -->
-        <div class="grid grid-cols-12 border-4 border-black h-full max-w-full">
-          <div class="col-span-5 border-r-4">
-            <div class="border border-b-4 h-48 bg-blue-600">
-              <div class="text-white">Salle de conférence</div>
-              <div class="flex justify-center">
-                <a
-                  href=""
-                  class="flex justify-center border-2 border-white rounded-lg w-12"
-                >
-                  <svg
-                    class="w-6 h-6 text-gray-800 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
-              <div class="flex justify-evenly flex-wrap">
-                <div></div>
-              </div>
+      <section class="grid col-span-8 border-2 border-gray-300 p-2 m-2 shadow-gray-400 rounded-lg">
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-amber-50 rounded-md p-3 border-2 border-slate-100 flex flex-col ">
+          <header class="flex items-center justify-between">
+            <label for="">Salle de conférence</label>
+            <button class="p-2 rounded-lg">
+              <svg class="w-6 h-6 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+            </button>
+          </header>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <div class="flex justify-between bg-slate-200 rounded-md py-2 px-1 w-full">
+          <div class="flex justify-evenly gap-1">
+            <div>
+              <img class="w-12 rounded-full" src="img/abderr_2.jpg" alt="" />
             </div>
-            <div class="bg-red-500 h-64">
-              <div class="text-white">Reception</div>
-              <div class="flex justify-center">
-                <a
-                  href=""
-                  class="flex justify-center border-2 border-white rounded-lg w-12"
-                >
-                  <svg
-                    class="w-6 h-6 text-gray-800 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="col-span-1"></div> -->
-          <div class="col-span-7 border-l-4">
-            <div class="flex flex-row justify-evenly w-full h-48">
-              <div class="w-36 border-t-4"></div>
-              <div class="border-4 w-full bg-green-600">
-                <div class="text-white">Servers room</div>
-                <div class="flex justify-center">
-                  <a
-                    href=""
-                    class="flex justify-center border-2 border-white rounded-lg w-12"
-                  >
-                    <svg
-                      class="w-6 h-6 text-gray-800 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <div class="border-4 w-full bg-yellow-400">
-                <div class="text-white">salle de securité</div>
-                <div class="flex justify-center">
-                  <a
-                    href=""
-                    class="flex justify-center border-2 border-white rounded-lg w-12"
-                  >
-                    <svg
-                      class="w-6 h-6 text-gray-800 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="h-20"></div>
-            <div class="flex flex-row justify-evenly w-full h-44">
-              <div class="border-b-4 w-36"></div>
-              <div class="border-4 w-full bg-violet-600">
-                <div class="text-white">Staff room</div>
-                <div class="flex justify-center">
-                  <a
-                    href=""
-                    class="flex justify-center border-2 border-white rounded-lg w-12"
-                  >
-                    <svg
-                      class="w-6 h-6 text-gray-800 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <div class="border-4 w-full bg-teal-500">
-                <div class="text-white">Vault</div>
-                <div class="flex justify-center">
-                  <a
-                    href=""
-                    class="flex justify-center border-2 border-white rounded-lg w-12"
-                  >
-                    <svg
-                      class="w-6 h-6 text-gray-800 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+            <div class="flex flex-col px-1">
+              <label for="nom">abderr_2</label>
+              <label for="poste" class="text-red-600">Reception</label>
             </div>
           </div>
         </div>
+          </div>
+        </div>
+        <div class="bg-slate-50 rounded-md p-3 border-2 border-slate-100 flex flex-col">
+          <header class="flex items-center justify-between">
+            <label for="">Reception</label>
+            <button class="p-2 rounded-lg">
+              <svg class="w-6 h-6 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+            </button>
+          </header>
+          <div class="mt-3 flex flex-wrap gap-2">
+
+          </div>
+        </div>
+        <div class="bg-slate-50 rounded-md p-3 border-2 border-slate-100 flex flex-col">
+          <header class="flex items-center justify-between">
+            <label for="">Salle des serveurs</label>
+            <button class="p-2 rounded-lg">
+              <svg class="w-6 h-6 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+            </button>
+          </header>
+          <div class="mt-3 flex flex-wrap gap-2">
+
+          </div>
+        </div>
+        <div class="bg-slate-50 rounded-md p-3 border-2 border-slate-100 flex flex-col">
+          <header class="flex items-center justify-between">
+            <label for="">Salle de sécurité</label>
+            <button class="p-2 rounded-lg">
+              <svg class="w-6 h-6 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+            </button>
+          </header>
+          <div class="mt-3 flex flex-wrap gap-2">
+
+          </div>
+        </div>
+        <div class="bg-slate-50 rounded-md p-3 border-2 border-slate-100 flex flex-col">
+          <header class="flex items-center justify-between">
+            <label for="">Salle du personnel</label>
+            <button class="p-2 rounded-lg">
+              <svg class="w-6 h-6 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+            </button>
+          </header>
+          <div class="mt-3 flex flex-wrap gap-2">
+
+          </div>
+        </div>
+        <div class="bg-blue-50 rounded-md p-3 border-2 border-slate-100 flex flex-col">
+          <header class="flex items-center justify-between">
+            <label for="">Salle d'archives</label>
+            <button class="p-2 rounded-lg">
+              <svg class="w-6 h-6 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+            </button>
+          </header>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <div class="flex justify-between bg-slate-200 rounded-md py-2 px-1 w-full">
+          <div class="flex justify-evenly gap-1">
+            <div>
+              <img class="w-12 rounded-full" src="img/abderr_2.jpg" alt="" />
+            </div>
+            <div class="flex flex-col px-1">
+              <label for="nom">abderr_2</label>
+              <label for="poste" class="text-red-600">Reception</label>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+       </div>
       </section>
-    </section>
+    </main>
     <!-- modal tailwind -->
     <!-- Main modal -->
     <el-dialog>
@@ -249,19 +179,23 @@
             class="relative transform overflow-hidden rounded-lg bg-gray-800 text-left shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
           >
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <div class="sm:flex sm:items-center">
+              <div class="flex justify-center sm:flex sm:items-center">
                 <!-- div pour le photo -->
                 <!-- <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-500/10 sm:mx-0 sm:size-10">
              
             </div> -->
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <h3
+                  <div class="flex justify-center">
+                    <h3
                     id="dialog-title"
                     class="text-base font-semibold text-black pb-2"
                   >
                     Add new worker
                   </h3>
-                  <div class="min-w-72 text-start">
+                  </div>
+                  
+                  <form action="">
+                     <div class="min-w-72 text-start">
                     <div class="flex flex-col">
                       <label for="nom">Photo(URL)</label>
                       <input
@@ -314,15 +248,13 @@
                     </button>
                   </div>
                   <fieldset>Experience</fieldset>
-                  <div
-                    id="formExper"
-                    class="border-2 p-2 border-gray-400 rounded-lg"
-                  >
+                  <div id="formExper">
                     <!-- exper -->
-                    
                   </div>
+                  
                   <div class="bg-white py-3 sm:flex sm:justify-between">
                     <button
+                    name="ajouter"
                       type="button"
                       command="close"
                       commandfor="dialog"
@@ -331,6 +263,7 @@
                       Ajouter
                     </button>
                     <button
+                    name="annuler"
                       type="button"
                       command="close"
                       commandfor="dialog"
@@ -339,6 +272,8 @@
                       Annuler
                     </button>
                   </div>
+                  </form>
+                 
                 </div>
               </div>
             </div>

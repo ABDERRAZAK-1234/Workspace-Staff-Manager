@@ -5,6 +5,8 @@ let btnAjouterExper = document.getElementById('btn_Ajouter_Exper');
 
 document.getElementById('btn_Ajouter_Exper').addEventListener("click", ()=>{
     document.getElementById("formExper").innerHTML +=`
+    <div class="border-2 p-2 border-gray-400 rounded-lg">
+
    <div>
                       <div class="flex flex-col">
                         <label for="name_Expe">Nom</label>
@@ -23,8 +25,14 @@ document.getElementById('btn_Ajouter_Exper').addEventListener("click", ()=>{
                         />
                       </div>
                     </div>
-                    <div class="w-full h-1 rounded-lg bg-slate-400 my-2 " ></div>
+                    
+                    </div>
+                    <div class="w-full h-1 rounded-lg bg-green-500 my-2 " ></div>
     `;
 })
+// form de validation
+function formValidation(){
+
+}
 
 // Ajouter staff
