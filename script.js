@@ -52,30 +52,18 @@ let ArrayStaff = [];
 let idcount = 1;
 let countinerExperience = document.getElementById("countinerExperience");
 formAjouterStaff = document.forms["formAjouterStaff"];
-// form_Exper = document.forms["form-Exp"];
-
-// for (let i = 0; i < exper.length; i++) {
-//   employee.exper.push({
-//     nom: form.nomExper[i].value,
-//     role: form.roleExper[i].value,
-//   });
-// }
-
- let nomExp = document.querySelectorAll("nomExper");
-  let roleExp = document.querySelectorAll("roleExper");
-
-  for (let i = 0; i < nomExp.length; i++) {
-    employee.exper.push({
-      nom: nomExp[i].value,
-      role: roleExp[i].value,
-    });
-  }
 
 // console.log(formAjouterStaff);
 
 formAjouterStaff.addEventListener("submit", (e) => {
-  let form = e.target;
   e.preventDefault();
+
+   let nomExp = document.querySelectorAll(".nomExper");
+  let roleExp = document.querySelectorAll(".roleExper");
+  let arrayExper = [];
+
+  let form = e.target;
+
   let employee = {
     id: idcount,
     photo: formAjouterStaff.input_photo.value,
@@ -83,20 +71,34 @@ formAjouterStaff.addEventListener("submit", (e) => {
     prenom: formAjouterStaff.firstname.value,
     email: formAjouterStaff.email.value,
     telephone: formAjouterStaff.telephone.value,
-    exper: [],
+    exper: arrayExper,
   };
+  // Array experience
+ 
+
+  for (let i = 0; i < nomExp.length; i++) {
+    arrayExper.push({
+      nom: nomExp[i].value,
+      role: roleExp[i].value,
+    });
+  }
   ArrayStaff.push(employee);
   idcount++;
   console.log(ArrayStaff);
-  localStorage.setItem('staffData', JSON.stringify(ArrayStaff));
+  localStorage.setItem("staffData", JSON.stringify(ArrayStaff));
   formAjouterStaff.reset();
+  // pour refrech le photo
+  document.getElementById("formExper").innerHTML = "";
+  cover_photo.style.backgroundImage = "";
+  icon_cover.style.display = "block";
+
+  alert("Employé ajouté avec succès!");
 });
 // load data from localStorage
-let data = localStorage.getItem('staffData');
-if(data){
+let data = localStorage.getItem("staffData");
+if (data) {
   ArrayStaff = JSON.parse(data);
   console.log(ArrayStaff);
-  
 }
 
 // save local storage
