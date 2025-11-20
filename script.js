@@ -1,28 +1,27 @@
-let btnAjouterExper = document.getElementById('btn_Ajouter_Exper');
+let btnAjouterExper = document.getElementById("btn_Ajouter_Exper");
 
+document.getElementById("btn_Ajouter_Exper").addEventListener("click", () => {
+  document.getElementById("formExper").innerHTML += `
+    <div id="form_Exper" class="border-2 p-2 border-gray-400 rounded-lg">
 
-
-
-document.getElementById('btn_Ajouter_Exper').addEventListener("click", ()=>{
-    document.getElementById("formExper").innerHTML +=`
-    <div class="border-2 p-2 border-gray-400 rounded-lg">
-
-   <div>
+   <div id="countinerExperience">
                       <div class="flex flex-col">
                         <label for="name_Expe">Nom</label>
                         <input
-                          id="nomExper"
+                          id="nomEx"
+                          name="nomExperience"
                           type="text"
-                          class="rounded-lg py-2 px-1 bg-gray-700/25"
+                          class="nomExper rounded-lg py-2 px-1 bg-gray-700/25"
                           placeholder="Nom"
                         />
                       </div>
                       <div class="flex flex-col">
                         <label for="name_Expe">Role</label>
                         <input
-                          id="roleExper"
+                          id="roleEx"
+                          name="roleExperience"
                           type="text"
-                          class="rounded-lg py-2 px-1 bg-gray-700/25"
+                          class=" roleExper rounded-lg py-2 px-1 bg-gray-700/25"
                           placeholder="role"
                         />
                       </div>
@@ -31,46 +30,80 @@ document.getElementById('btn_Ajouter_Exper').addEventListener("click", ()=>{
                     </div>
                     <div class="w-full h-1 rounded-lg bg-green-500 my-2 " ></div>
     `;
-})
+});
 // form de validation
-function formValidation(){
+let input_picture = document.getElementById("input_photo");
+let nom_Employer = document.getElementById("lastname");
+let prenom_Employer = document.getElementById("firstname");
+let email_Employer = document.getElementById("email");
+let telephone_Employer = document.getElementById("telephone");
 
+function formValidation(e) {
+  let regexPhoto = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?$/;
+  e.preventDefault();
+  if (input_picture.value == "") {
+    input_picture.style.borderColor = "red";
+    return;
+  }
 }
 
 // Ajouter staff
 let ArrayStaff = [];
+let idcount = 1;
+let countinerExperience = document.getElementById("countinerExperience");
 formAjouterStaff = document.forms["formAjouterStaff"];
-formAjouterStaff.addEventListener("submit", function (e) {
-   
-    e.preventDefault()
-    console.log(11);
-    let employee = {
-        photo : formAjouterStaff.input_photo.value,
-        nom : formAjouterStaff.lastname.value,
-        prenom : formAjouterStaff.firstname.value,
-        email : formAjouterStaff.email.value,
-        telephone : formAjouterStaff.telephone.value,
-        exper : [
-            {
-                nom : formAjouterStaff.nomExper.value,
-                role : formAjouterStaff.roleExper.value,
-            }
-        ]
-    }
-      console.log(employee);
-    ArrayStaff.push(employee);
-    console.log(ArrayStaff);
-    formAjouterStaff.reset();
-    
+// form_Exper = document.forms["form-Exp"];
+
+// for (let i = 0; i < exper.length; i++) {
+//   employee.exper.push({
+//     nom: form.nomExper[i].value,
+//     role: form.roleExper[i].value,
+//   });
+// }
+
+ let nomExp = document.querySelectorAll("nomExper");
+  let roleExp = document.querySelectorAll("roleExper");
+
+  for (let i = 0; i < nomExp.length; i++) {
+    employee.exper.push({
+      nom: nomExp[i].value,
+      role: roleExp[i].value,
+    });
+  }
+
+// console.log(formAjouterStaff);
+
+formAjouterStaff.addEventListener("submit", (e) => {
+  let form = e.target;
+  e.preventDefault();
+  let employee = {
+    id: idcount,
+    photo: formAjouterStaff.input_photo.value,
+    nom: formAjouterStaff.lastname.value,
+    prenom: formAjouterStaff.firstname.value,
+    email: formAjouterStaff.email.value,
+    telephone: formAjouterStaff.telephone.value,
+    exper: [],
+  };
+console.log(form_Exper);
+  // employee.exper.forEach(()=>{
+
+  // })
+  console.log(employee);
+  ArrayStaff.push(employee);
+  idcount++;
+  console.log(ArrayStaff);
+  formAjouterStaff.reset();
 });
 
+// save local storage
+function saveToLocaleStorage() {}
 
 // photo modal
-let input_photo = document.getElementById('input_photo');
-let cover_photo = document.getElementById('cover_photo');
-let icon_cover = document.getElementById('icon_cover');
-input_photo.addEventListener("input",function(){
-   cover_photo.style.backgroundImage = `url(${input_photo.value})`;
-   icon_cover.style.display = 'none';
-})
-
+let input_photo = document.getElementById("input_photo");
+let cover_photo = document.getElementById("cover_photo");
+let icon_cover = document.getElementById("icon_cover");
+input_photo.addEventListener("input", function () {
+  cover_photo.style.backgroundImage = `url(${input_photo.value})`;
+  icon_cover.style.display = "none";
+});
