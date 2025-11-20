@@ -13,7 +13,8 @@
   <body>
     <main class="md:grid md:grid-cols-12 gap-4 p-4">
       <aside
-        class="flex flex-col col-span-3 shadow-xl shadow-gray-400 rounded-lg px-2 text-center gap-1"
+      id="side-bar"
+        class="flex flex-col col-span-3 shadow-xl shadow-gray-400 rounded-lg px-2 text-center gap-1 overflow-auto "
       >
         <h2 class="py-1">Staff Members (Unassigned)</h2>
         <button
@@ -24,10 +25,9 @@
           Ajouter un nouveau
         </button>
 
-        <div
-          class="flex justify-between bg-slate-200 rounded-md py-2 my-2 px-1"
-        >
-          <div class="flex justify-evenly gap-1">
+        <div class="new_Employee">
+          <div class=" flex justify-between bg-slate-200 rounded-md py-2 my-2 px-1">
+                      <div class="flex justify-evenly gap-1">
             <div>
               <img class="w-12 rounded-full" src="img/abderr_2.jpg" alt="" />
             </div>
@@ -55,6 +55,8 @@
               />
             </svg>
           </div>
+          </div>
+
         </div>
       </aside>
       <div class="grid-cols-1"></div>
