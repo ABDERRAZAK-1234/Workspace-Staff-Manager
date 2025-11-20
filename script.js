@@ -85,16 +85,19 @@ formAjouterStaff.addEventListener("submit", (e) => {
     telephone: formAjouterStaff.telephone.value,
     exper: [],
   };
-console.log(form_Exper);
-  // employee.exper.forEach(()=>{
-
-  // })
-  console.log(employee);
   ArrayStaff.push(employee);
   idcount++;
   console.log(ArrayStaff);
+  localStorage.setItem('staffData', JSON.stringify(ArrayStaff));
   formAjouterStaff.reset();
 });
+// load data from localStorage
+let data = localStorage.getItem('staffData');
+if(data){
+  ArrayStaff = JSON.parse(data);
+  console.log(ArrayStaff);
+  
+}
 
 // save local storage
 function saveToLocaleStorage() {}
