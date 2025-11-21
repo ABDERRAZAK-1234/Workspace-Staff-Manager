@@ -38,23 +38,73 @@ let prenom_Employer = document.getElementById("firstname");
 let email_Employer = document.getElementById("email");
 let telephone_Employer = document.getElementById("telephone");
 
-function formValidation(e) {
-  let regexPhoto = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?$/;
-  e.preventDefault();
-  if (input_picture.value == "") {
-    input_picture.style.borderColor = "red";
-    return;
-  }
-}
-
 // Ajouter staff
 let ArrayStaff = [];
-let idcount = 1;
+  let idcount = 1;
 let countinerExperience = document.getElementById("countinerExperience");
 formAjouterStaff = document.forms["formAjouterStaff"];
 
 formAjouterStaff.addEventListener("submit", (e) => {
   e.preventDefault();
+
+ // REGEX
+  let regexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,30}$/;
+  let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let regexTel = /^(?:\+212|00212|0)(6|7)\d{8}$/;
+  let regexURL =/^(https?:\/\/(?:www\.)?|www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+
+  //  INPUTS
+  let photo = formAjouterStaff.input_photo;
+  let nom = formAjouterStaff.lastname;
+  let prenom = formAjouterStaff.firstname;
+  let email = formAjouterStaff.email;
+  let tel = formAjouterStaff.telephone;
+
+  let validForm = true;
+
+  //  VALIDATION PHOTO
+  if (!regexURL.test(photo.value)) {
+    photo.style.borderColor = "red";
+    validForm = false;
+  } else {
+    photo.style.borderColor = "green";
+  }
+
+  //  VALIDATION NOM
+  if (!regexName.test(nom.value)) {
+    nom.style.borderColor = "red";
+    validForm = false;
+  } else {
+    nom.style.borderColor = "green";
+  }
+
+  //  VALIDATION PRENOM
+  if (!regexName.test(prenom.value)) {
+    prenom.style.borderColor = "red";
+    validForm = false;
+  } else {
+    prenom.style.borderColor = "green";
+  }
+
+  //  VALIDATION EMAIL
+  if (!regexEmail.test(email.value)) {
+    email.style.borderColor = "red";
+    validForm = false;
+  } else {
+    email.style.borderColor = "green";
+  }
+
+  // VALIDATION TELEPHONE
+  if (!regexTel.test(tel.value)) {
+    tel.style.borderColor = "red";
+    validForm = false;
+  } else {
+    tel.style.borderColor = "green";
+  }
+
+if (!validForm) return;
+
+  // -----------------------------
 
   let nomExp = document.querySelectorAll(".nomExper");
   let roleExp = document.querySelectorAll(".roleExper");
@@ -72,7 +122,8 @@ formAjouterStaff.addEventListener("submit", (e) => {
     exper: arrayExper,
   };
   // Array experience
-
+  
+  
   for (let i = 0; i < nomExp.length; i++) {
     arrayExper.push({
       nom: nomExp[i].value,
@@ -80,9 +131,11 @@ formAjouterStaff.addEventListener("submit", (e) => {
     });
   }
   ArrayStaff.push(employee);
-  idcount++;
+  
   console.log(ArrayStaff);
+
   localStorage.setItem("staffData", JSON.stringify(ArrayStaff));
+    idcount++;
   formAjouterStaff.reset();
   // pour refrech le photo
   document.getElementById("formExper").innerHTML = "";
@@ -91,13 +144,26 @@ formAjouterStaff.addEventListener("submit", (e) => {
 
   alert("Employé ajouté avec succès!");
   location.reload();
+
 });
+
 // load data from localStorage
 let data = localStorage.getItem("staffData");
 if (data) {
   ArrayStaff = JSON.parse(data);
-  console.log(ArrayStaff);
+  
+  if (ArrayStaff.length > 0) {
+    idcount = ArrayStaff[ArrayStaff.length - 1].id + 1;
+  } else {
+    idcount = 1;
+  }
+
+} else {
+  idcount = 1;
 }
+  console.log(ArrayStaff);
+
+
 
 // save local storage
 function saveToLocaleStorage() {}
