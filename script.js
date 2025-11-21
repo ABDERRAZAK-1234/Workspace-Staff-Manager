@@ -45,9 +45,66 @@ let countinerExperience = document.getElementById("countinerExperience");
 formAjouterStaff = document.forms["formAjouterStaff"];
 
 formAjouterStaff.addEventListener("submit", (e) => {
+  
   e.preventDefault();
+  let form = e.target;
+  
+    // ---------formValidation-------
+if(!formValidation(formAjouterStaff)){
+  return
+}
 
- // REGEX
+  // -----------------------------
+
+  let nomExp = document.querySelectorAll(".nomExper");
+  let roleExp = document.querySelectorAll(".roleExper");
+  let arrayExper = [];
+
+
+
+  let employee = {
+    id: idcount,
+    photo: formAjouterStaff.input_photo.value,
+    nom: formAjouterStaff.lastname.value,
+    prenom: formAjouterStaff.firstname.value,
+    poste: formAjouterStaff.poste.value,
+    email: formAjouterStaff.email.value,
+    telephone: formAjouterStaff.telephone.value,
+    exper: arrayExper,
+  };
+
+
+  // Array experience
+  
+  
+  for (let i = 0; i < nomExp.length; i++) {
+    arrayExper.push({
+      nom: nomExp[i].value,
+      role: roleExp[i].value,
+    });
+  }
+  ArrayStaff.push(employee);
+  
+  console.log(ArrayStaff);
+
+  localStorage.setItem("staffData", JSON.stringify(ArrayStaff));
+    idcount++;
+  formAjouterStaff.reset();
+  // pour refrech le photo
+  document.getElementById("formExper").innerHTML = "";
+  cover_photo.style.backgroundImage = "";
+  icon_cover.style.display = "block";
+
+
+  alert("Employe ajoute avec succes!");
+  location.reload();
+
+});
+
+// form validation
+
+function formValidation(formAjouterStaff){
+  // REGEX
   let regexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,30}$/;
   let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   let regexTel = /^(?:\+212|00212|0)(6|7)\d{8}$/;
@@ -57,6 +114,7 @@ formAjouterStaff.addEventListener("submit", (e) => {
   let photo = formAjouterStaff.input_photo;
   let nom = formAjouterStaff.lastname;
   let prenom = formAjouterStaff.firstname;
+  let poste = formAjouterStaff.poste;
   let email = formAjouterStaff.email;
   let tel = formAjouterStaff.telephone;
 
@@ -86,6 +144,14 @@ formAjouterStaff.addEventListener("submit", (e) => {
     prenom.style.borderColor = "green";
   }
 
+  // VALIDATION POSTE
+  if(!regexName.test(poste.value)){
+    poste.style.borderColor = "red";
+    validForm = false;
+  } else{
+    poste.style.borderColor = "green";
+  }
+
   //  VALIDATION EMAIL
   if (!regexEmail.test(email.value)) {
     email.style.borderColor = "red";
@@ -102,50 +168,10 @@ formAjouterStaff.addEventListener("submit", (e) => {
     tel.style.borderColor = "green";
   }
 
-if (!validForm) return;
+// if (!validForm) 
+ return validForm;
 
-  // -----------------------------
-
-  let nomExp = document.querySelectorAll(".nomExper");
-  let roleExp = document.querySelectorAll(".roleExper");
-  let arrayExper = [];
-
-  let form = e.target;
-
-  let employee = {
-    id: idcount,
-    photo: formAjouterStaff.input_photo.value,
-    nom: formAjouterStaff.lastname.value,
-    prenom: formAjouterStaff.firstname.value,
-    email: formAjouterStaff.email.value,
-    telephone: formAjouterStaff.telephone.value,
-    exper: arrayExper,
-  };
-  // Array experience
-  
-  
-  for (let i = 0; i < nomExp.length; i++) {
-    arrayExper.push({
-      nom: nomExp[i].value,
-      role: roleExp[i].value,
-    });
-  }
-  ArrayStaff.push(employee);
-  
-  console.log(ArrayStaff);
-
-  localStorage.setItem("staffData", JSON.stringify(ArrayStaff));
-    idcount++;
-  formAjouterStaff.reset();
-  // pour refrech le photo
-  document.getElementById("formExper").innerHTML = "";
-  cover_photo.style.backgroundImage = "";
-  icon_cover.style.display = "block";
-
-  alert("Employé ajouté avec succès!");
-  location.reload();
-
-});
+}
 
 // load data from localStorage
 let data = localStorage.getItem("staffData");
@@ -188,19 +214,20 @@ function afficherStaff() {
   ArrayStaff.forEach((employe) => {
     let div = document.createElement("div");
     div.innerHTML = `
-       <div class=" flex justify-between bg-slate-200 rounded-md py-2 my-2 px-1">
+       <div class="emplye flex justify-between bg-slate-200 rounded-md py-2 my-4 px-1 hover:animate-bounce ">
           <div class="flex justify-evenly gap-1">
             <div>
               <img class="w-12 rounded-full" src="${employe.photo}" alt="" />
             </div>
             <div class="flex flex-col px-1">
-              <label for="nom">${employe.nom}</label>
-              <label for="poste" class="text-red-600">${employe.prenom}</label>
+              <label class="text-sm" for="nom">${employe.nom} ${employe.prenom}</label>
+              <label for="poste" class="text-red-600">${employe.poste}</label>
             </div>
           </div>
           <div class="flex items-center">
+          <button type="button" class="btnAfficherProfil cursor-pointer " command="show-modal" commandfor="dialogProfil">
             <svg
-              class="w-9 text-gray-800 dark:text-black"
+              class="w-9 text-gray-800 dark:text-black hover:text-green-500"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -216,6 +243,7 @@ function afficherStaff() {
                 d="M7 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h1m4-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm7.441 1.559a1.907 1.907 0 0 1 0 2.698l-6.069 6.069L10 19l.674-3.372 6.07-6.07a1.907 1.907 0 0 1 2.697 0Z"
               />
             </svg>
+            </button>
           </div>
         </div>`;
     new_Employee.appendChild(div);
@@ -224,3 +252,13 @@ function afficherStaff() {
 }
   
 afficherStaff();
+document.querySelectorAll(".emplye").addEventListener("click",()=>{
+  document.querySelectorAll(".dialogProfil").style.display="block"
+})
+// document.querySelector(".dialogProfil").style.display = "none";
+// document.querySelectorAll('.btnAfficherProfil').addEventListener("click",()=>{
+//   document.querySelectorAll(".dialogProfil ").style.display = "block";
+// })
+// document.querySelectorAll('.btnAnnuler').addEventListener("click",()=>{
+//   document.querySelectorAll(".dialogProfil ").style.display = "none";
+// })
