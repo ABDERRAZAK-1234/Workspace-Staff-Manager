@@ -1,4 +1,5 @@
 let btnAjouterExper = document.getElementById("btn_Ajouter_Exper");
+let zoneTargeted = ""
 
 document.getElementById("btn_Ajouter_Exper").addEventListener("click", () => {
   document.getElementById("formExper").innerHTML += `
@@ -206,14 +207,12 @@ input_photo.addEventListener("input", function () {
 // -----------ajouter employee dans aside
 function afficherStaff() {
   let sidBar = document.getElementById("side-bar");
-  let new_Employee = document.querySelectorAll(".new_Employee");
-  new_Employee = document.createElement("div");
-  sidBar.appendChild(new_Employee);
-  new_Employee.innerHTML= "";
+  let new_Employee = document.querySelector(".new_Employee");
+  new_Employee.innerHTML = "";
 
   ArrayStaff.forEach((employe) => {
     let div = document.createElement("div");
-    div.innerHTML = `
+    new_Employee.innerHTML += `
        <div class="emplye flex justify-between bg-slate-200 rounded-md py-2 my-4 px-1 hover:animate-bounce ">
           <div class="flex justify-evenly gap-1">
             <div>
@@ -225,7 +224,7 @@ function afficherStaff() {
             </div>
           </div>
           <div class="flex items-center">
-          <button type="button" class="btnAfficherProfil cursor-pointer " command="show-modal" commandfor="dialogProfil">
+          <button type="button" class="btnAfficherProfil cursor-pointer" data-id="${employe.id}" command="show-modal" commandfor="dialogProfil">
             <svg
               class="w-9 text-gray-800 dark:text-black hover:text-green-500"
               aria-hidden="true"
@@ -248,13 +247,16 @@ function afficherStaff() {
         </div>`;
     new_Employee.appendChild(div);
   });
+
+  activerProfil();
+
   
 }
   
 afficherStaff();
-document.querySelectorAll(".emplye").addEventListener("click",()=>{
-  document.querySelectorAll(".dialogProfil").style.display="block"
-})
+// document.querySelectorAll(".emplye").addEventListener("click",()=>{
+//   document.querySelectorAll(".dialogProfil").style.display="block"
+// })
 // document.querySelector(".dialogProfil").style.display = "none";
 // document.querySelectorAll('.btnAfficherProfil').addEventListener("click",()=>{
 //   document.querySelectorAll(".dialogProfil ").style.display = "block";
@@ -262,3 +264,120 @@ document.querySelectorAll(".emplye").addEventListener("click",()=>{
 // document.querySelectorAll('.btnAnnuler').addEventListener("click",()=>{
 //   document.querySelectorAll(".dialogProfil ").style.display = "none";
 // })
+// let btnZones = document.querySelectorAll(".btnZones");
+// btnZones.forEach((btn)=>{
+//   btn.addEventListener("click",(event)=>{
+//     let btnTargeted = event.target.getAttribute("id");
+//     console.log(event.target.getAttribute("id"));
+    
+//   })
+// })
+
+let zones = document.querySelectorAll(".zones");
+// console.log(zones);
+zones.forEach((zone)=>{
+  // console.log(zone.getAttribute("id"));
+  zone.addEventListener("click",(event)=>{
+    let zoneTargeted = event.target.getAttribute("id");
+    console.log(event.target.getAttribute("id"));
+    // addTozone(zoneTargeted);
+  })
+})
+// btn add employe les list  data-unique = ${obj.id}
+// afficher list 
+document.getElementById("popup-modal").style.display = "none";
+let btnZones = document.querySelectorAll(".btnZones");
+btnZones.forEach((btn)=>{
+  btn.addEventListener("click", () => {
+  document.getElementById("popup-modal").style.display = "block";
+  afficherListEmployes(); 
+});
+
+})
+
+//-------------------- Afficher profil--------------------
+function activerProfil() {
+  let buttonsProfil = document.querySelectorAll(".btnAfficherProfil");
+
+  buttonsProfil.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let id = btn.getAttribute("data-id");
+      let employe = ArrayStaff.find(e => e.id == id);
+
+      if (!employe) return;
+
+      document.getElementById("profilPhoto").style.backgroundImage = `url(${employe.photo})`;
+      document.getElementById("profilNom").textContent = employe.nom;
+      document.getElementById("profilPrenom").textContent = employe.prenom;
+      document.getElementById("profilPoste").textContent = employe.poste;
+      document.getElementById("profilEmail").textContent = employe.email;
+      document.getElementById("profilTel").textContent = employe.telephone;
+
+      let expDiv = document.getElementById("profilExperience");
+      expDiv.innerHTML = "";
+
+      employe.exper.forEach(exp => {
+        expDiv.innerHTML += `
+          <div class="border p-1 my-1 rounded">
+             <strong>Role:</strong> ${exp.nom}<br>
+             <strong>Poste:</strong> ${exp.role}
+          </div>`;
+      });
+
+      // show modal
+      document.getElementById("dialogProfil").style.display = "block";
+    });
+  });
+}
+
+  // afficher list Employe
+  function afficherListEmployes() {
+  let container = document.querySelector("#popup-modal .flex.flex-col");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  ArrayStaff.forEach(emp => {
+    container.innerHTML += `
+      <div class="listEmp flex items-center gap-3 p-2 bg-gray-200 my-2 rounded cursor-pointer" data-id="${emp.id}">
+        <img src="${emp.photo}" class="w-12 h-12 rounded-full">
+        <div>
+          <strong>${emp.nom} ${emp.prenom}</strong><br>
+          <span class="text-sm text-gray-700">${emp.poste}</span>
+        </div>
+      </div>
+    `;
+  });
+
+  let listBtns = document.querySelectorAll(".listEmp");
+
+  listBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      let id = btn.getAttribute("data-id");
+      let emp = ArrayStaff.find(e => e.id == id);
+
+      if (!emp) return;
+
+      // remplir popup modal data
+      document.getElementById("listPhoto").style.backgroundImage = `url(${emp.photo})`;
+      document.getElementById("listNom").textContent = emp.nom;
+      document.getElementById("listPrenom").textContent = emp.prenom;
+      document.getElementById("listPoste").textContent = emp.poste;
+      document.getElementById("listEmail").textContent = emp.email;
+      document.getElementById("listTel").textContent = emp.telephone;
+
+      let expDiv = document.getElementById("listExperience");
+      expDiv.innerHTML = "";
+
+      emp.exper.forEach(ex => {
+        expDiv.innerHTML += `
+          <div class="border p-1 my-1 rounded">
+            <strong>Role:</strong> ${ex.nom} <br>
+            <strong>Poste:</strong> ${ex.role}
+          </div>
+        `;
+      });
+    });
+  });
+}
+
