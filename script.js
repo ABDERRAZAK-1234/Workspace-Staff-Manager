@@ -1,6 +1,15 @@
 let btnAjouterExper = document.getElementById("btn_Ajouter_Exper");
 let zoneTargeted = "";
 
+let zonesData = {
+  zoneConference: [],
+  zoneReception: [],
+  zoneServeur: [],
+  zoneSecurite: [],
+  zoneArchive: [],
+  zonePersonnel: [],
+};
+
 document.getElementById("btn_Ajouter_Exper").addEventListener("click", () => {
   document.getElementById("formExper").innerHTML += `
     <div id="form_Exper" class="border-2 p-2 border-gray-400 rounded-lg">
@@ -281,7 +290,8 @@ function activerProfil() {
         profilPhoto.style.backgroundImage = `url(${employe.photo})`;
         profilPhoto.style.backgroundSize = "cover";
         profilPhoto.style.backgroundPosition = "center";
-        document.getElementById("icon_cover_AfficherPro").style.display ="none";
+        document.getElementById("icon_cover_AfficherPro").style.display =
+          "none";
       }
       document.getElementById("profilNom").textContent = employe.nom;
       document.getElementById("profilPrenom").textContent = employe.prenom;
@@ -340,19 +350,28 @@ function afficherListEmployes() {
     `;
   });
 
-let listBtns = document.querySelectorAll(".btnAjouterToZones");
+  let listBtns = document.querySelectorAll(".btnAjouterToZones");
 
-listBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  listBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let id = btn.getAttribute("data-id");
+      let emp = ArrayStaff.find((e) => e.id == id);
 
-    let id = btn.getAttribute("data-id");
-    let emp = ArrayStaff.find((e) => e.id == id);
+      if (!allowZone(emp.poste, currentZone)) {
+        alert(" Ce poste n’est pas autorise");
+        return;
+      }
+      zonesData[currentZone].push(emp);
 
-    // if (!emp || !currentZone) return;
+      let index = ArrayStaff.findIndex((e) => e.id == emp.id);
+      if (index !== -1) ArrayStaff.splice(index, 1);
 
-    let zoneDiv = document.querySelector(`#${currentZone} .empList`);
+      // refresh sidebar
+      afficherStaff();
 
-    zoneDiv.innerHTML += `
+      let zoneDiv = document.querySelector(`#${currentZone} .empList`);
+
+      zoneDiv.innerHTML += `
       <div class="flex justify-between bg-slate-200 rounded-md py-2 px-1 w-full cursor-pointer">
         <div class="flex justify-evenly gap-1">
           <div>
@@ -363,12 +382,20 @@ listBtns.forEach((btn) => {
             <label class="text-red-600">${emp.poste}</label>
           </div>
         </div>
+         <button class="remove-from-zone text-red-600 p-0 font-bold px-1 hover:bg-red-500 rounded cursor-pointer" data-id="${emp.id}">
+            <svg class="w-6 h-6 text-gray-800 hover:text-white dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+</svg>
+
+  </button>
       </div>
     `;
-    document.getElementById("modalList").close();
+      document.getElementById("modalList").close();
 
       // remplir popup modal data
-      document.getElementById("listPhoto").style.backgroundImage = `url(${emp.photo})`;
+      document.getElementById(
+        "listPhoto"
+      ).style.backgroundImage = `url(${emp.photo})`;
       document.getElementById("listNom").textContent = emp.nom;
       document.getElementById("listPrenom").textContent = emp.prenom;
       document.getElementById("listPoste").textContent = emp.poste;
@@ -388,4 +415,32 @@ listBtns.forEach((btn) => {
       });
     });
   });
+}
+
+function allowZone(employeePoste, zoneId) {
+  const rules = {
+    zoneConference: [
+      "Manager",
+      "Reception",
+      "Techniciens IT",
+      "Agents de sécurité",
+      "Nettoyage",
+      "Autres rôles",
+    ],
+    zoneReception: ["Reception", "Manager"],
+    zoneServeur: ["Techniciens IT", "Manager"],
+    zoneSecurite: ["Agents de sécurité", "Manager"],
+    zoneArchive: ["Manager", "Autres rôles"],
+
+    zonePersonnel: [
+      "Manager",
+      "Reception",
+      "Techniciens IT",
+      "Agents de sécurité",
+      "Nettoyage",
+      "Autres rôles",
+    ],
+  };
+
+  return rules[zoneId].includes(employeePoste);
 }
