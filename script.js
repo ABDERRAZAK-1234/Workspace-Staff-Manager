@@ -7,7 +7,7 @@ document.getElementById("btn_Ajouter_Exper").addEventListener("click", () => {
 
    <div id="countinerExperience">
                       <div class="flex flex-col">
-                        <label for="name_Expe">Nom</label>
+                        <label for="name_Expe">Nom:</label>
                         <input
                           id="nomEx"
                           name="nomExperience"
@@ -17,13 +17,13 @@ document.getElementById("btn_Ajouter_Exper").addEventListener("click", () => {
                         />
                       </div>
                       <div class="flex flex-col">
-                        <label for="name_Expe">Duree</label>
+                        <label for="name_Expe">Duree:</label>
                         <input
                           id="roleEx"
                           name="roleExperience"
                           type="text"
                           class=" roleExper rounded-lg py-2 px-1 bg-gray-700/25"
-                          placeholder="role"
+                          placeholder="Ex: 2 ans"
                         />
                       </div>
                     </div>
@@ -69,6 +69,7 @@ formAjouterStaff.addEventListener("submit", (e) => {
     email: formAjouterStaff.email.value,
     telephone: formAjouterStaff.telephone.value,
     exper: arrayExper,
+    assignedZones: [],
   };
 
   // Array experience
@@ -92,7 +93,7 @@ formAjouterStaff.addEventListener("submit", (e) => {
   icon_cover.style.display = "block";
 
   alert("Employe ajoute avec succes!");
-  location.reload();
+  afficherStaff();
 });
 
 // form validation
@@ -365,14 +366,9 @@ listBtns.forEach((btn) => {
       </div>
     `;
     document.getElementById("modalList").close();
-  });
-});
-
 
       // remplir popup modal data
-      document.getElementById(
-        "listPhoto"
-      ).style.backgroundImage = `url(${emp.photo})`;
+      document.getElementById("listPhoto").style.backgroundImage = `url(${emp.photo})`;
       document.getElementById("listNom").textContent = emp.nom;
       document.getElementById("listPrenom").textContent = emp.prenom;
       document.getElementById("listPoste").textContent = emp.poste;
@@ -390,4 +386,6 @@ listBtns.forEach((btn) => {
           </div>
         `;
       });
-    };
+    });
+  });
+}
