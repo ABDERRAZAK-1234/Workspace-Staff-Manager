@@ -1,5 +1,5 @@
 let btnAjouterExper = document.getElementById("btn_Ajouter_Exper");
-let zoneTargeted = ""
+let zoneTargeted = "";
 
 document.getElementById("btn_Ajouter_Exper").addEventListener("click", () => {
   document.getElementById("formExper").innerHTML += `
@@ -17,7 +17,7 @@ document.getElementById("btn_Ajouter_Exper").addEventListener("click", () => {
                         />
                       </div>
                       <div class="flex flex-col">
-                        <label for="name_Expe">Role</label>
+                        <label for="name_Expe">Duree</label>
                         <input
                           id="roleEx"
                           name="roleExperience"
@@ -41,27 +41,24 @@ let telephone_Employer = document.getElementById("telephone");
 
 // Ajouter staff
 let ArrayStaff = [];
-  let idcount = 1;
+let idcount = 1;
 let countinerExperience = document.getElementById("countinerExperience");
 formAjouterStaff = document.forms["formAjouterStaff"];
 
 formAjouterStaff.addEventListener("submit", (e) => {
-  
   e.preventDefault();
   let form = e.target;
-  
-    // ---------formValidation-------
-if(!formValidation(formAjouterStaff)){
-  return
-}
+
+  // ---------formValidation-------
+  if (!formValidation(formAjouterStaff)) {
+    return;
+  }
 
   // -----------------------------
 
   let nomExp = document.querySelectorAll(".nomExper");
   let roleExp = document.querySelectorAll(".roleExper");
   let arrayExper = [];
-
-
 
   let employee = {
     id: idcount,
@@ -74,10 +71,8 @@ if(!formValidation(formAjouterStaff)){
     exper: arrayExper,
   };
 
-
   // Array experience
-  
-  
+
   for (let i = 0; i < nomExp.length; i++) {
     arrayExper.push({
       nom: nomExp[i].value,
@@ -85,31 +80,30 @@ if(!formValidation(formAjouterStaff)){
     });
   }
   ArrayStaff.push(employee);
-  
+
   console.log(ArrayStaff);
 
   localStorage.setItem("staffData", JSON.stringify(ArrayStaff));
-    idcount++;
+  idcount++;
   formAjouterStaff.reset();
   // pour refrech le photo
   document.getElementById("formExper").innerHTML = "";
   cover_photo.style.backgroundImage = "";
   icon_cover.style.display = "block";
 
-
   alert("Employe ajoute avec succes!");
   location.reload();
-
 });
 
 // form validation
 
-function formValidation(formAjouterStaff){
+function formValidation(formAjouterStaff) {
   // REGEX
   let regexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,30}$/;
   let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   let regexTel = /^(?:\+212|00212|0)(6|7)\d{8}$/;
-  let regexURL =/^(https?:\/\/(?:www\.)?|www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+  let regexURL =
+    /^(https?:\/\/(?:www\.)?|www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
 
   //  INPUTS
   let photo = formAjouterStaff.input_photo;
@@ -146,10 +140,10 @@ function formValidation(formAjouterStaff){
   }
 
   // VALIDATION POSTE
-  if(!regexName.test(poste.value)){
+  if (!regexName.test(poste.value)) {
     poste.style.borderColor = "red";
     validForm = false;
-  } else{
+  } else {
     poste.style.borderColor = "green";
   }
 
@@ -169,36 +163,32 @@ function formValidation(formAjouterStaff){
     tel.style.borderColor = "green";
   }
 
-// if (!validForm) 
- return validForm;
-
+  // if (!validForm)
+  return validForm;
 }
 
 // load data from localStorage
 let data = localStorage.getItem("staffData");
 if (data) {
   ArrayStaff = JSON.parse(data);
-  
+
   if (ArrayStaff.length > 0) {
     idcount = ArrayStaff[ArrayStaff.length - 1].id + 1;
   } else {
     idcount = 1;
   }
-
 } else {
   idcount = 1;
 }
-  console.log(ArrayStaff);
-
-
+console.log(ArrayStaff);
 
 // save local storage
 function saveToLocaleStorage() {}
 
 // photo modal
 let input_photo = document.getElementById("input_photo");
-let cover_photo = document.getElementById("cover_photo");
-let icon_cover = document.getElementById("icon_cover");
+let cover_photo = document.getElementById("cover_photo_ajouterStaff");
+let icon_cover = document.getElementById("icon_cover_AjouterStaff");
 input_photo.addEventListener("input", function () {
   cover_photo.style.backgroundImage = `url(${input_photo.value})`;
   icon_cover.style.display = "none";
@@ -249,51 +239,30 @@ function afficherStaff() {
   });
 
   activerProfil();
-
-  
 }
-  
+
 afficherStaff();
-// document.querySelectorAll(".emplye").addEventListener("click",()=>{
-//   document.querySelectorAll(".dialogProfil").style.display="block"
-// })
-// document.querySelector(".dialogProfil").style.display = "none";
-// document.querySelectorAll('.btnAfficherProfil').addEventListener("click",()=>{
-//   document.querySelectorAll(".dialogProfil ").style.display = "block";
-// })
-// document.querySelectorAll('.btnAnnuler').addEventListener("click",()=>{
-//   document.querySelectorAll(".dialogProfil ").style.display = "none";
-// })
-// let btnZones = document.querySelectorAll(".btnZones");
-// btnZones.forEach((btn)=>{
-//   btn.addEventListener("click",(event)=>{
-//     let btnTargeted = event.target.getAttribute("id");
-//     console.log(event.target.getAttribute("id"));
-    
-//   })
-// })
 
 let zones = document.querySelectorAll(".zones");
 // console.log(zones);
-zones.forEach((zone)=>{
+zones.forEach((zone) => {
   // console.log(zone.getAttribute("id"));
-  zone.addEventListener("click",(event)=>{
+  zone.addEventListener("click", (event) => {
     let zoneTargeted = event.target.getAttribute("id");
     console.log(event.target.getAttribute("id"));
     // addTozone(zoneTargeted);
-  })
-})
-// btn add employe les list  data-unique = ${obj.id}
-// afficher list 
-document.getElementById("popup-modal").style.display = "none";
-let btnZones = document.querySelectorAll(".btnZones");
-btnZones.forEach((btn)=>{
-  btn.addEventListener("click", () => {
-  document.getElementById("popup-modal").style.display = "block";
-  afficherListEmployes(); 
+  });
 });
-
-})
+// btn add employe les list  data-unique = ${obj.id}
+// afficher list
+document.getElementById("modalList").close();
+let btnZones = document.querySelectorAll(".btnZones");
+btnZones.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.getElementById("modalList").showModal();
+    afficherListEmployes();
+  });
+});
 
 //-------------------- Afficher profil--------------------
 function activerProfil() {
@@ -302,11 +271,16 @@ function activerProfil() {
   buttonsProfil.forEach((btn) => {
     btn.addEventListener("click", () => {
       let id = btn.getAttribute("data-id");
-      let employe = ArrayStaff.find(e => e.id == id);
+      let employe = ArrayStaff.find((e) => e.id == id);
 
-      if (!employe) return;
-
-      document.getElementById("profilPhoto").style.backgroundImage = `url(${employe.photo})`;
+      let profilPhoto = document.getElementById("profilPhoto");
+      if (employe.photo) {
+        profilPhoto.style.backgroundImage = `url(${employe.photo})`;
+        profilPhoto.style.backgroundSize = "cover";
+        profilPhoto.style.backgroundPosition = "center";
+        document.getElementById("icon_cover_AfficherPro").style.display =
+          "none";
+      }
       document.getElementById("profilNom").textContent = employe.nom;
       document.getElementById("profilPrenom").textContent = employe.prenom;
       document.getElementById("profilPoste").textContent = employe.poste;
@@ -316,50 +290,67 @@ function activerProfil() {
       let expDiv = document.getElementById("profilExperience");
       expDiv.innerHTML = "";
 
-      employe.exper.forEach(exp => {
+      employe.exper.forEach((exp) => {
         expDiv.innerHTML += `
-          <div class="border p-1 my-1 rounded">
-             <strong>Role:</strong> ${exp.nom}<br>
-             <strong>Poste:</strong> ${exp.role}
+          <div class="flex justify-between p-1 my-1 rounded">
+          <div>
+          <strong>Nom:</strong>
+             <span>${exp.nom}</span> 
+          </div>
+          <div>
+          <strong>Duree:</strong>
+             <span>${exp.role}</span> 
+          </div>
+             
           </div>`;
       });
-
-      // show modal
-      document.getElementById("dialogProfil").style.display = "block";
     });
   });
 }
 
-  // afficher list Employe
-  function afficherListEmployes() {
-  let container = document.querySelector("#popup-modal .flex.flex-col");
+// afficher list Employe
+function afficherListEmployes() {
+  let container = document.querySelector("#modalList .flex.flex-col");
   if (!container) return;
 
   container.innerHTML = "";
 
-  ArrayStaff.forEach(emp => {
+  ArrayStaff.forEach((emp) => {
     container.innerHTML += `
-      <div class="listEmp flex items-center gap-3 p-2 bg-gray-200 my-2 rounded cursor-pointer" data-id="${emp.id}">
-        <img src="${emp.photo}" class="w-12 h-12 rounded-full">
-        <div>
-          <strong>${emp.nom} ${emp.prenom}</strong><br>
-          <span class="text-sm text-gray-700">${emp.poste}</span>
+      <div class="emplye flex justify-between bg-slate-200 rounded-md py-2 my-4 px-1 hover:animate-bounce ">
+          <div class="flex justify-evenly gap-1">
+            <div>
+              <img class="w-12 rounded-full" src="${emp.photo}" alt="" />
+            </div>
+            <div class="flex flex-col px-1">
+              <label class="text-sm" for="nom">${emp.nom} ${emp.prenom}</label>
+              <label for="poste" class="text-red-600">${emp.poste}</label>
+            </div>
+          </div>
+          <div class="flex items-center">
+          <button type="button" class="btnAjouterToZones cursor-pointer" data-id="${emp.id}" command="show-modal" commandfor="modalList">
+            <svg class="w-6 h-6 text-gray-800 dark:text-green-500 hover:text-white hover:bg-green-500 rounded" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+</svg>
+            </button>
+          </div>
         </div>
-      </div>
     `;
   });
 
-  let listBtns = document.querySelectorAll(".listEmp");
+let listBtns = document.querySelectorAll(".btnAjouterToZones");
 
-  listBtns.forEach(btn => {
+  listBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       let id = btn.getAttribute("data-id");
-      let emp = ArrayStaff.find(e => e.id == id);
+      let emp = ArrayStaff.find((e) => e.id == id);
 
       if (!emp) return;
 
       // remplir popup modal data
-      document.getElementById("listPhoto").style.backgroundImage = `url(${emp.photo})`;
+      document.getElementById(
+        "listPhoto"
+      ).style.backgroundImage = `url(${emp.photo})`;
       document.getElementById("listNom").textContent = emp.nom;
       document.getElementById("listPrenom").textContent = emp.prenom;
       document.getElementById("listPoste").textContent = emp.poste;
@@ -369,15 +360,14 @@ function activerProfil() {
       let expDiv = document.getElementById("listExperience");
       expDiv.innerHTML = "";
 
-      emp.exper.forEach(ex => {
+      emp.exper.forEach((ex) => {
         expDiv.innerHTML += `
           <div class="border p-1 my-1 rounded">
             <strong>Role:</strong> ${ex.nom} <br>
-            <strong>Poste:</strong> ${ex.role}
+            <strong>duree:</strong> ${ex.role}
           </div>
         `;
       });
     });
   });
 }
-

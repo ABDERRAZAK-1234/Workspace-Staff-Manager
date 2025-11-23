@@ -145,7 +145,7 @@
           >
             <header class="flex items-center justify-between">
               <label for="">Salle de sécurité</label>
-              <button id="btnZone5"
+              <button id="btnZone4"
                 class="btnZones p-2 rounded-lg bg-green-400 hover:bg-green-100 hover:text-green-500 cursor-pointer"
               >
                 <svg
@@ -342,7 +342,7 @@
                         />
                       </div>
                       <div class="flex flex-col">
-                        <label for="nom">Role</label>
+                        <label for="nom">Poste</label>
                         <input
                           name="poste"
                           id="poste"
@@ -442,7 +442,7 @@
                   <!-- div pour le photo -->
                   <div class="flex justify-center">
                     <div
-                      id="cover_photo_AfficherProf"
+                      id="profilPhoto"
                       class="mx-auto flex w-20 h-20 items-center justify-center rounded-full bg-cover bg-gray-300"
                     >
                       <svg
@@ -473,29 +473,25 @@
                   <div class="flex flex-col">
                     <div>
                       <strong for="nom" class="">Nom:</strong>
-                      <span>Aamaich</span>
+                      <span id="profilNom"></span>
                     </div>
                     <div>
                       <strong for="Prenom">Prenom:</strong>
-                      <span>Abderrazak</span>
+                      <span id="profilPrenom"></span>
                     </div>
                     <div class="strong">
                       <strong>Poste:</strong>
-                      <span>Reception</span>
+                      <span id="profilPoste"></span>
                     </div>
                     <div>
-                      <fieldset><Strong>Expeerience:</Strong></fieldset>
-                      <div>
-                        <div>
-                        <strong>Role:</strong>
-                      <span>EXPER1</span>
-                      </div>
-                      <div>
-                        <strong>Durée:</strong>
-                      <span>2mois</span>
-                      </div>
-                      </div>
-                      
+                      <strong>Email:</strong> <span id="profilEmail"></span>
+                    </div>
+                    <div>
+                      <strong>Tel:</strong> <span id="profilTel"></span>
+                    </div>
+                    <div>
+                      <fieldset><Strong class="text-green-500">Expeerience:</Strong></fieldset>
+                      <div id="profilExperience"></div>
                     </div>
                     
                   </div>
@@ -527,7 +523,7 @@
 
 <el-dialog>
       <dialog
-        id="popup-modal"
+        id="modalList"
         aria-labelledby="dialog-title"
         class="dialogList fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent"
       >
@@ -545,37 +541,6 @@
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="flex justify-center sm:flex sm:items-center">
                 <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <!-- div pour le photo -->
-                  <div class="flex justify-center">
-                    <div
-                      id="cover_photo_List"
-                      class="mx-auto flex w-20 h-20 items-center justify-center rounded-full bg-cover bg-gray-300"
-                    >
-                      <svg
-                        id="icon_cover_List"
-                        class="w-6 h-6 text-gray-800 dark:text-white"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke="currentColor"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4 18V8a1 1 0 0 1 1-1h1.5l1.707-1.707A1 1 0 0 1 8.914 5h6.172a1 1 0 0 1 .707.293L17.5 7H19a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"
-                        />
-                        <path
-                          stroke="currentColor"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
                   <div class="flex flex-col">
                       <!-- PHOTO -->
                       <div id="listPhoto"
@@ -627,8 +592,8 @@
                         name="annuler"
                         type="button"
                         command="close"
-                        commandfor="dialogList"
-                        class="cursor-pointer mt-3 inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:text-red-500 hover:bg-gray-200 sm:mt-0 sm:w-auto"
+                        commandfor="modalList"
+                        class="cursor-pointer mt-3 inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:text-red-500 hover:bg-gray-200 sm:mt-0 sm:w-full"
                       >
                         Annuler
                       </button>
