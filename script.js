@@ -255,10 +255,12 @@ zones.forEach((zone) => {
 });
 // btn add employe les list  data-unique = ${obj.id}
 // afficher list
+let currentZone = "";
 document.getElementById("modalList").close();
 let btnZones = document.querySelectorAll(".btnZones");
 btnZones.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (btn) => {
+    currentZone = btn.target.closest(".zones").getAttribute("id");
     document.getElementById("modalList").showModal();
     afficherListEmployes();
   });
@@ -278,8 +280,7 @@ function activerProfil() {
         profilPhoto.style.backgroundImage = `url(${employe.photo})`;
         profilPhoto.style.backgroundSize = "cover";
         profilPhoto.style.backgroundPosition = "center";
-        document.getElementById("icon_cover_AfficherPro").style.display =
-          "none";
+        document.getElementById("icon_cover_AfficherPro").style.display ="none";
       }
       document.getElementById("profilNom").textContent = employe.nom;
       document.getElementById("profilPrenom").textContent = employe.prenom;
@@ -340,12 +341,33 @@ function afficherListEmployes() {
 
 let listBtns = document.querySelectorAll(".btnAjouterToZones");
 
-  listBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      let id = btn.getAttribute("data-id");
-      let emp = ArrayStaff.find((e) => e.id == id);
+listBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
 
-      if (!emp) return;
+    let id = btn.getAttribute("data-id");
+    let emp = ArrayStaff.find((e) => e.id == id);
+
+    // if (!emp || !currentZone) return;
+
+    let zoneDiv = document.querySelector(`#${currentZone} .empList`);
+
+    zoneDiv.innerHTML += `
+      <div class="flex justify-between bg-slate-200 rounded-md py-2 px-1 w-full cursor-pointer">
+        <div class="flex justify-evenly gap-1">
+          <div>
+            <img class="w-12 rounded-full" src="${emp.photo}" alt="" />
+          </div>
+          <div class="flex flex-col px-1">
+            <label>${emp.nom} ${emp.prenom}</label>
+            <label class="text-red-600">${emp.poste}</label>
+          </div>
+        </div>
+      </div>
+    `;
+    document.getElementById("modalList").close();
+  });
+});
+
 
       // remplir popup modal data
       document.getElementById(
@@ -368,6 +390,4 @@ let listBtns = document.querySelectorAll(".btnAjouterToZones");
           </div>
         `;
       });
-    });
-  });
-}
+    };
