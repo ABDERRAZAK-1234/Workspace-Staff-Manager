@@ -112,8 +112,7 @@ function formValidation(formAjouterStaff) {
   let regexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,30}$/;
   let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   let regexTel = /^(?:\+212|00212|0)(6|7)\d{8}$/;
-  let regexURL =
-    /^(https?:\/\/(?:www\.)?|www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+  let regexURL =/^(https?:\/\/(?:www\.)?|www\.)[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
 
   //  INPUTS
   let photo = formAjouterStaff.input_photo;
@@ -213,14 +212,14 @@ function afficherStaff() {
   ArrayStaff.forEach((employe) => {
     let div = document.createElement("div");
     new_Employee.innerHTML += `
-       <div class="emplye flex justify-between bg-slate-200 rounded-md py-2 my-4 px-1 hover:animate-bounce ">
+       <div class="emplye flex justify-between bg-slate-200 rounded-md py-2 my-4 px-1 hover:animate-bounce hover:shadow-xl/40">
           <div class="flex justify-evenly gap-1">
             <div>
               <img class="w-12 rounded-full" src="${employe.photo}" alt="" />
             </div>
             <div class="flex flex-col px-1">
               <label class="text-sm" for="nom">${employe.nom} ${employe.prenom}</label>
-              <label for="poste" class="text-red-600">${employe.poste}</label>
+              <label for="poste" class="posteSid">${employe.poste}</label>
             </div>
           </div>
           <div class="flex items-center">
@@ -263,7 +262,7 @@ zones.forEach((zone) => {
     // addTozone(zoneTargeted);
   });
 });
-// btn add employe les list  data-unique = ${obj.id}
+
 // afficher list
 let currentZone = "";
 document.getElementById("modalList").close();
@@ -329,14 +328,14 @@ function afficherListEmployes() {
 
   ArrayStaff.forEach((emp) => {
     container.innerHTML += `
-      <div class="emplye flex justify-between bg-slate-200 rounded-md py-2 my-4 px-1 hover:animate-bounce ">
+      <div class="emplye flex justify-between bg-slate-200 rounded-md py-2 my-4 px-1 hover:animate-bounce hover:shadow-xl/40 hover:shadow-green-500">
           <div class="flex justify-evenly gap-1">
             <div>
               <img class="w-12 rounded-full" src="${emp.photo}" alt="" />
             </div>
             <div class="flex flex-col px-1">
               <label class="text-sm" for="nom">${emp.nom} ${emp.prenom}</label>
-              <label for="poste" class="text-red-600">${emp.poste}</label>
+              <label for="poste" class="text-red-500">${emp.poste}</label>
             </div>
           </div>
           <div class="flex items-center">
@@ -382,7 +381,7 @@ function afficherListEmployes() {
             <label class="text-red-600">${emp.poste}</label>
           </div>
         </div>
-         <button class="remove-from-zone text-red-600 p-0 font-bold px-1 hover:bg-red-500 rounded cursor-pointer" data-id="${emp.id}">
+         <button class="remove-from-zone text-red-600 p-0 h-6 font-bold px-1 hover:bg-red-500 rounded cursor-pointer" data-id="${emp.id}">
             <svg class="w-6 h-6 text-gray-800 hover:text-white dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
 </svg>
@@ -444,3 +443,29 @@ function allowZone(employeePoste, zoneId) {
 
   return rules[zoneId].includes(employeePoste);
 }
+
+function colorPoste() {
+    ArrayStaff.forEach((a,i) =>{
+        if (a.poste === 'Manager') {
+            document.querySelectorAll(".posteSid")[i].style.color = "green";
+            document.querySelectorAll(".emplye")[i].classList.add("hover:shadow-green-600");
+
+        }else if (a.poste === 'Reception'){
+          document.querySelectorAll(".posteSid")[i].style.color = "red";
+          document.querySelectorAll(".emplye")[i].classList.add("hover:shadow-red-600");
+        }else if (a.poste === 'Techniciens IT'){
+          document.querySelectorAll(".posteSid")[i].style.color = "orange";
+          document.querySelectorAll(".emplye")[i].classList.add("hover:shadow-yellow-600");
+        }else if (a.poste === 'Agents de sécurité'){
+          document.querySelectorAll(".posteSid")[i].style.color = "blue";
+          document.querySelectorAll(".emplye")[i].classList.add("hover:shadow-blue-600");
+        }else if (a.poste === 'Nettoyage'){
+          document.querySelectorAll(".posteSid")[i].style.color = "fuchsia";
+          document.querySelectorAll(".emplye")[i].classList.add("hover:shadow-fuchsia-600");
+        }else if (a.poste === 'Autres rôles'){
+          document.querySelectorAll(".posteSid")[i].style.color = "cyan";
+          document.querySelectorAll(".emplye")[i].classList.add("hover:shadow-cyan-600");
+        }
+    })
+}
+colorPoste();
